@@ -10,8 +10,7 @@ export class LoginPage {
   passwordField = element(by.css('input[formControlName="password"]'));
   loginButton = element(by.css('button[type="submit"]'));
 
-  constructor() {
-  }
+  constructor() {}
 
   async login() {
     await this.usernameField.sendKeys('test');

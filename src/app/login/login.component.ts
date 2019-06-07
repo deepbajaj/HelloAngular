@@ -14,40 +14,46 @@ const log = new Logger('Login');
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-
   version: string = environment.version;
   error: string | undefined;
   loginForm!: FormGroup;
   isLoading = false;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private i18nService: I18nService,
-              private authenticationService: AuthenticationService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private i18nService: I18nService,
+    private authenticationService: AuthenticationService
+  ) {
     this.createForm();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   login() {
     this.isLoading = true;
     const login$ = this.authenticationService.login(this.loginForm.value);
-    login$.pipe(
-      finalize(() => {
-        this.loginForm.markAsPristine();
-        this.isLoading = false;
-      }),
-      untilDestroyed(this)
-    ).subscribe(credentials => {
-      log.debug(`${credentials.username} successfully logged in`);
-      this.router.navigate([ this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
-    }, error => {
-      log.debug(`Login error: ${error}`);
-      this.error = error;
-    });
+    login$
+      .pipe(
+        finalize(() => {
+          this.loginForm.markAsPristine();
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        credentials => {
+          log.debug(`${credentials.username} successfully logged in`);
+          this.router.navigate([this.route.snapshot.queryParams.redirect || '/'], { replaceUrl: true });
+        },
+        error => {
+          log.debug(`Login error: ${error}`);
+          this.error = error;
+        }
+      );
   }
 
   setLanguage(language: string) {
@@ -69,5 +75,4 @@ export class LoginComponent implements OnInit, OnDestroy {
       remember: true
     });
   }
-
 }

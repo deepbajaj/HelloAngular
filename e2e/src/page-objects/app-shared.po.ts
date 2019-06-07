@@ -6,8 +6,7 @@
 import { browser, element, by } from 'protractor';
 
 export class AppSharedPage {
-  constructor() {
-  }
+  constructor() {}
 
   async navigateAndSetLanguage() {
     // Forces default language

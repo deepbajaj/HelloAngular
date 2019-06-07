@@ -21,7 +21,6 @@ export function extract(s: string) {
 
 @Injectable()
 export class I18nService {
-
   defaultLanguage!: string;
   supportedLanguages!: string[];
 
@@ -45,8 +44,9 @@ export class I18nService {
     this.language = '';
 
     // Warning: this subscription will always be alive for the app's lifetime
-    this.langChangeSubscription = this.translateService.onLangChange
-      .subscribe((event: LangChangeEvent) => { localStorage.setItem(languageKey, event.lang); });
+    this.langChangeSubscription = this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+      localStorage.setItem(languageKey, event.lang);
+    });
   }
 
   /**
@@ -89,5 +89,4 @@ export class I18nService {
   get language(): string {
     return this.translateService.currentLang;
   }
-
 }

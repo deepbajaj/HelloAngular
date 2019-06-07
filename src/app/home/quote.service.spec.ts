@@ -10,14 +10,8 @@ describe('QuoteService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        CoreModule,
-        HttpClientTestingModule
-      ],
-      providers: [
-        HttpCacheService,
-        QuoteService
-      ]
+      imports: [CoreModule, HttpClientTestingModule],
+      providers: [HttpCacheService, QuoteService]
     });
 
     quoteService = TestBed.get(QuoteService);

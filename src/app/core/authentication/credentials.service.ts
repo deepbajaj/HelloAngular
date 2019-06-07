@@ -14,7 +14,6 @@ const credentialsKey = 'credentials';
  */
 @Injectable()
 export class CredentialsService {
-
   private _credentials: Credentials | null = null;
 
   constructor() {
@@ -58,5 +57,4 @@ export class CredentialsService {
       localStorage.removeItem(credentialsKey);
     }
   }
-
 }
