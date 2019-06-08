@@ -19,29 +19,6 @@ pipeline {
         sh 'yarn lint'
       }
     }
-    stage('Unit Test') {
-      agent {
-        docker 'circleci/node:9.3-stretch-browsers'
-      }
-      steps {
-        unstash 'node_modules'
-        sh 'yarn test:ci'
-        junit 'reports/**/*.xml'
-      }
-    }
-    stage('E2E Test') {
-      agent {
-        docker 'circleci/node:9.3-stretch-browsers'
-      }
-      steps {
-        unstash 'node_modules'
-        sh 'mkdir -p reports'
-        sh 'yarn e2e:pre-ci'
-        sh 'yarn e2e:ci'
-        sh 'yarn e2e:post-ci'
-        junit 'reports/**/*.xml'
-      }
-    }
     stage('Compile') {
       agent {
         docker 'circleci/node:9.3-stretch-browsers'
