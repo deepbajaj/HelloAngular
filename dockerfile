@@ -25,7 +25,7 @@ pipeline {
       }
       steps {
         unstash 'node_modules'
-        sh 'yarn build:prod'
+        sh 'yarn build:production'
         stash includes: 'dist/', name: 'dist'
       }
     }
