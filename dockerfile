@@ -6,7 +6,7 @@ pipeline {
         docker 'circleci/node:9.3-stretch-browsers'
       }
       steps {
-        sh 'yarn'
+        sh 'npm'
         stash includes: 'node_modules/', name: 'node_modules'
       }
     }
@@ -16,7 +16,7 @@ pipeline {
       }
       steps {
         unstash 'node_modules'
-        sh 'yarn lint'
+        sh 'npm run lint'
       }
     }
     stage('Compile') {
@@ -25,7 +25,7 @@ pipeline {
       }
       steps {
         unstash 'node_modules'
-        sh 'yarn build:production'
+        sh 'npn run build --production'
         stash includes: 'dist/', name: 'dist'
       }
     }
